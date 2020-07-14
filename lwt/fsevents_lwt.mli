@@ -16,16 +16,19 @@
  *)
 
 type event = {
-  path  : string;
+  path : string;
   flags : Fsevents.EventFlags.t;
-  id    : Fsevents.EventId.t;
+  id : Fsevents.EventId.t;
 }
 
 type t
 
 val create :
   ?since:Fsevents.EventId.t ->
-  float -> Fsevents.CreateFlags.t -> string list -> t
+  float ->
+  Fsevents.CreateFlags.t ->
+  string list ->
+  t
 
 val get_latest_event_id : t -> Fsevents.EventId.t
 

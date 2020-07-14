@@ -16,9 +16,9 @@
  *)
 
 type event = {
-  path  : string;
+  path : string;
   flags : Fsevents.EventFlags.t;
-  id    : Fsevents.EventId.t;
+  id : Fsevents.EventId.t;
 }
 
 type t = {
@@ -29,10 +29,11 @@ type t = {
 
 let create ?since latency flags paths =
   let stream, push = Lwt_stream.create () in
-  let import path flags id = Lwt_preemptive.run_in_main (fun () ->
-    push (Some { path; flags; id; });
-    Lwt.return_unit
-  ) in
+  let import path flags id =
+    Lwt_preemptive.run_in_main (fun () ->
+        push (Some { path; flags; id });
+        Lwt.return_unit)
+  in
   let event_stream = Fsevents.create ?since latency flags import paths in
   { stream; push; event_stream }
 

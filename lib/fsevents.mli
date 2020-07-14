@@ -17,7 +17,6 @@
  *)
 
 module CreateFlags : sig
-
   type t = {
     use_cf_types : bool;
     no_defer : bool;
@@ -28,36 +27,31 @@ module CreateFlags : sig
   }
 
   val detailed_interactive : t
-
 end
 
 module EventFlags : sig
-
-  type dropping_party = {
-    user : bool;
-    kernel: bool;
-  }
+  type dropping_party = { user : bool; kernel : bool }
 
   type item_type = File | Symlink | Dir | Hardlink
 
   type t = {
-    must_scan_subdirs    : dropping_party option;
-    event_ids_wrapped    : bool;
-    history_done         : bool;
-    root_changed         : bool;
-    mount                : bool;
-    unmount              : bool;
-    own_event            : bool;
-    item_created         : bool;
-    item_removed         : bool;
-    item_inode_meta_mod  : bool;
-    item_renamed         : bool;
-    item_modified        : bool;
+    must_scan_subdirs : dropping_party option;
+    event_ids_wrapped : bool;
+    history_done : bool;
+    root_changed : bool;
+    mount : bool;
+    unmount : bool;
+    own_event : bool;
+    item_created : bool;
+    item_removed : bool;
+    item_inode_meta_mod : bool;
+    item_renamed : bool;
+    item_modified : bool;
     item_finder_info_mod : bool;
-    item_change_owner    : bool;
-    item_xattr_mod       : bool;
-    item_type            : item_type option;
-    item_is_last_hardlink: bool;
+    item_change_owner : bool;
+    item_xattr_mod : bool;
+    item_type : item_type option;
+    item_is_last_hardlink : bool;
   }
 
   val to_string : t -> string
@@ -68,9 +62,7 @@ module EventFlags : sig
 end
 
 module EventId : sig
-  type t =
-    | Now
-    | Since of Unsigned.UInt64.t
+  type t = Now | Since of Unsigned.UInt64.t
 
   val of_uint64 : Unsigned.UInt64.t -> t
 
